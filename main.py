@@ -80,7 +80,7 @@ apple_df['log_modal_price'] = np.log(apple_df['modal_price'])
 apple_df['log_arrivals'] = np.log(apple_df['arrivals'])
 apple_df['year'] = apple_df.index.get_level_values('date').year
 
-# 🔥 Remove rows with infs or NaNs caused by log(0) or missing values
+# Remove rows with infs or NaNs caused by log(0) or missing values
 apple_df = apple_df.replace([np.inf, -np.inf], np.nan).dropna(subset=['log_modal_price', 'log_arrivals'])
 
 # STEP 6: Run panel regression
@@ -118,5 +118,6 @@ anomalies = apple_df_reset[apple_df_reset['z_score'].abs() > 3]
 
 print("\nAnomalous Price Events:")
 print(anomalies[['market_id', 'date', 'modal_price', 'z_score']])
+
 
 
